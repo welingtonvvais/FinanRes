@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle Financeiro Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for a more modern look */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9; /* slate-100 */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #94a3b8; /* slate-400 */
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b; /* slate-500 */
+      }
+      /* Custom animations */
+      @keyframes fade-in {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+       @keyframes fade-out {
+        from { opacity: 1; transform: scale(1); }
+        to { opacity: 0; transform: scale(0.95); }
+      }
+      @keyframes toast-in {
+        from { opacity: 0; transform: translateX(100%); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.2s ease-out forwards;
+      }
+      .animate-toast-in {
+        animation: toast-in 0.3s ease-out forwards;
+      }
+       /* Custom Tooltip for Sidebar */
+      .tooltip-container {
+          position: relative;
+      }
+      .tooltip {
+          position: absolute;
+          left: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+          margin-left: 12px;
+          padding: 4px 10px;
+          background-color: #1e293b; /* slate-800 */
+          color: white;
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 500;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.2s, visibility 0.2s;
+          pointer-events: none;
+          z-index: 50;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+      .tooltip-container:hover .tooltip {
+          opacity: 1;
+          visibility: visible;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^18.2.0/",
+    "react": "https://esm.sh/react@^18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@^18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@^18.2.0",
+    "papaparse": "https://esm.sh/papaparse@5.4.1",
+    "jszip": "https://esm.sh/jszip@3.10.1",
+    "file-saver": "https://esm.sh/file-saver@2.0.5",
+    "recharts": "https://esm.sh/recharts@2.12.7"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-100 antialiased">
+    <div id="root"></div>
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 w-full max-w-xs space-y-2"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
