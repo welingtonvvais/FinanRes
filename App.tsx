@@ -5,9 +5,14 @@ import FinancialModule from './modules/FinancialModule';
 import PlaceholderModule from './modules/PlaceholderModule';
 import InventoryModule from './modules/InventoryModule';
 import HRModule from './modules/HRModule';
+import HomeScreen from './views/HomeScreen';
 
 export default function App() {
-    const [activeModule, setActiveModule] = useState<Module>('financeiro');
+    const [activeModule, setActiveModule] = useState<Module | null>(null);
+    
+    const handleGoHome = () => {
+        setActiveModule(null);
+    };
 
     const modules: { id: Module; name: string; icon: string; }[] = [
         { id: 'financeiro', name: 'Financeiro', icon: ICONS.bank },
@@ -26,19 +31,17 @@ export default function App() {
                 return <InventoryModule />;
             case 'pessoal':
                 return <HRModule />;
-            case 'pessoal':
-                return <PlaceholderModule moduleName="Departamento Pessoal" />;
             default:
-                return <FinancialModule />;
+                return null;
         }
     };
 
     return (
         <div className="flex h-screen bg-slate-100 font-sans">
             <aside className="w-20 bg-slate-900 p-4 flex flex-col items-center shrink-0 z-40 shadow-lg">
-                <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shrink-0 mb-6">
+                <button onClick={handleGoHome} className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shrink-0 mb-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-white" title="Voltar ao início">
                     <span className="text-white font-bold text-lg">P</span>
-                </div>
+                </button>
 
                 <nav className="flex flex-col items-center space-y-4">
                     {modules.map(module => (
@@ -61,7 +64,7 @@ export default function App() {
             </aside>
             
             <div className="flex-1 flex overflow-hidden">
-                {renderModule()}
+                 {activeModule ? renderModule() : <HomeScreen onSelectModule={setActiveModule} />}
             </div>
         </div>
     );
